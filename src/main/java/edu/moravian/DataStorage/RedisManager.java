@@ -16,10 +16,11 @@ public class RedisManager implements DataManager {
             jedis = new Jedis("localhost", 6379);
             System.out.println("Connection to server successfully");
             System.out.println("Server is running: " + jedis.ping());
-            jedis.flushAll();
 
             // Initialize all data members in redis
-            initializeLexiconData();
+            if (!dataIngested()){
+                initializeLexiconData();
+            }
             initializePlayerTags(player1, player2);
             initializeScores();
 
@@ -94,5 +95,19 @@ public class RedisManager implements DataManager {
             scores.add(new Score(word, value));
         }
         return scores;
+    }
+
+    public void deleteOldGameKeys() {
+        for (String key : jedis.keys("*")) {
+            if (!key.contains("words:")){
+                jedis.del(key);
+            }
+        }
+    }
+
+    private boolean dataIngested() {
+        // Check if the data has been ingested by checking if the keys exist
+        return (jedis.exists("words:3") && jedis.exists("words:4") && jedis.exists("words:5") && jedis.exists("words:6") && jedis.exists("words:7") && jedis.exists("words:8") && jedis.exists("words:9")) && jedis.exists("words:10")
+                && jedis.exists("words:11") && jedis.exists("words:12") && jedis.exists("words:13") && jedis.exists("words:14") && jedis.exists("words:15") && jedis.exists("words:16") && jedis.exists("words:17") && jedis.exists("words:18");
     }
 }
