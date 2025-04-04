@@ -15,6 +15,7 @@ public class AnagramBotDriver
     {
         Dotenv dotenv = Dotenv.load();
         String token = dotenv.get("DISCORD_TOKEN");
+	String channelName = Dotenv.load().get("CHANNEL_NAME");
         JDA api = JDABuilder.createDefault(token).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
         CommandManager commandManager = new CommandManager();
 
@@ -23,7 +24,7 @@ public class AnagramBotDriver
             @Override
             public void onMessageReceived(@NotNull MessageReceivedEvent event)
             {
-                if (event.getAuthor().isBot() || !event.getChannel().getName().equals("john-channel"))
+                if (event.getAuthor().isBot() || !event.getChannel().getName().equals(channelName))
                     return;
 
                 String sender = event.getAuthor().getName();
