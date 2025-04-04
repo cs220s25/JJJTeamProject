@@ -51,4 +51,13 @@ class RedisManagerTest {
         RedisManager redisManager = new RedisManager("player1", "player2");
         assertEquals("[]", redisManager.getWordsUsed());
     }
+
+    @Test
+    void testDeleteOldGameKeys(){
+        RedisManager redisManager = new RedisManager("player1", "player2");
+        redisManager.setAnagram("hello");
+        redisManager.addPlayerWord("hello", "player1");
+        redisManager.deleteOldGameKeys();
+        assertEquals(0, redisManager.getPlayerScores("player1").size());
+    }
 }
