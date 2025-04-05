@@ -1,12 +1,41 @@
 Authors: Jonathan Walsh, Jamell Alvarez, Jack Wagenheim
-## Project Description
+## Setup
+
+Before the bot can be run, a few steps must be taken. After the repo has been cloned, use `brew install redis` to install the database used by the bot.
+Next, create a file titles `.env`, with the following format:
+
+```sh
+DISCORD_TOKEN=<API key>
+CHANNEL_NAME=<Channel Name>
+```
+
+Where <API key> is replaced by your bots API key, and <Channel Name> is replace by the name of the channel in which the bot should be active.
+Finally, run `./deployLocal.sh` to execute a script that will execute the necessary steps to get the bot up and running.
+
+
+## Technologies Used
 
 By using the Discord API, this project aims to create a bot that can play a word guessing game with users.
-The bot will allow users to start a game, join, guess words, and stop the game.
-The bot will also keep track of the words that have been used in the game.
+[Discord Developer Site](https://discord.com/developers/docs/intro)
 
 The primary mode of data storage for this project is a Redis database, but the repository also contains an interface
 that can be implemented with any data storage method such as in memory or in a SQL database.
+[Redis Docs](https://redis.io/docs)
+
+The software project management tool, Maven, is used to package the bot, so that it can be run as a .jar file.
+[Maven Introduction](https://maven.apache.org/)
+
+
+## Background
+
+
+
+## Project Description
+
+The bot will allow users to start a game, join, guess words, and stop the game. 
+The bot will also keep track of the words that have been used in the game.
+
+
 ## System Diagram
 
 ![System Diagram](SystemDiagram.png)
