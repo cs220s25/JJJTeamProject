@@ -8,6 +8,11 @@ sudo systemctl enable redis6
 sudo systemctl start redis6
 
 ## clone repo
-
 git clone https://github.com/cs220s25/JJJTeamProject.git
 cd JJJTeamProject/
+
+## Give Script Permission
+chmod +x CreateEnv.sh
+chmod +x Ec2Deploy.sh
+
+
