@@ -14,6 +14,5 @@ cd JJJTeamProject/
 ## Give Script Permission
 chmod +x CreateEnv.sh
 chmod +x Ec2Deploy.sh
-chmod +x Ec2Requirements.sh
 
 
