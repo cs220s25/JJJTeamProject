@@ -1,4 +1,12 @@
-Authors: Jonathan Walsh, Jamell Alvarez, Jack Wagenheim
+# Anagram Discord Bot
+
+## CI Status 
+![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/run_tests.yml/badge.svg)
+
+## Contributors 
+* Jonathan Walsh <br>
+* Jamell Alvarez <br>
+* Jack Wagenheim
 ## Setup
 
 Before the bot can be run, a few steps must be taken. After the repo has been cloned, use `brew install redis` to install the database used by the bot.
