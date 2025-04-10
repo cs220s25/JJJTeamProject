@@ -1,4 +1,4 @@
-name: Run Maven Wrapper Tests
+name: Run Maven Tests
 
 on:
   push:
@@ -26,6 +26,6 @@ jobs:
         sudo systemctl start redis
         sudo systemctl status redis
 
-    - name: Run Maven Wrapper Tests
-      run: ./mvnw test
+    - name: Run Maven Tests
+      run: mvn test
 
