@@ -10,6 +10,8 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
+.DS_STORE
+**/.DS_STORE
 
 # Eclipse m2e generated files
 # Eclipse Core
