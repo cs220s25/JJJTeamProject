@@ -1,6 +1,8 @@
 package edu.moravian.Delivery;
 
 import edu.moravian.APP.GameStatus;
+import edu.moravian.DataStorage.Secrets;
+import edu.moravian.exceptions.SecretsException;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -11,11 +13,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class AnagramBotDriver
 {
-    public static void main(String[] args)
-    {
-        Dotenv dotenv = Dotenv.load();
-        String token = dotenv.get("DISCORD_TOKEN");
-	String channelName = Dotenv.load().get("CHANNEL_NAME");
+    public static void main(String[] args) throws SecretsException {
+
+        String secretTokenName = "220_Discord_Token";
+        String secretTokenKeyPair = "DISCORD_TOKEN";
+
+        String secretChannelName = "Discord_Channel";
+        String secretChannelKeyPair = "CHANNEL_NAME";
+
+        Secrets secrets = new Secrets();
+        String token = secrets.getSecret(secretTokenName, secretTokenKeyPair);
+        String channelName = secrets.getSecret(secretChannelName, secretChannelKeyPair);
+
         JDA api = JDABuilder.createDefault(token).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
         CommandManager commandManager = new CommandManager();
 
