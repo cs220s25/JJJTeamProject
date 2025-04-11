@@ -3,7 +3,6 @@ Description=Discord Bot
 After=network-online.target
 
 [Service]
-WorkingDirectory=/home/ec2-user/JJJTeamProject
 ExecStart=java $JAVA_OPTS -jar target/dbot-1.0-SNAPSHOT.jar
 
 
