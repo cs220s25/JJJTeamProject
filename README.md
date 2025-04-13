@@ -1,7 +1,9 @@
 # Anagram Discord Bot
 
 ## CI Status 
-![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/run_tests.yml/badge.svg)
+![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/DeployOnAws.yml/badge.svg)<br>
+![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/run_tests.yml/badge.svg) <br>
+
 
 ## Contributors 
 * Jonathan Walsh <br>
