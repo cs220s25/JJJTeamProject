@@ -6,21 +6,31 @@
 
 
 ## Contributors 
-* Jonathan Walsh <br>
 * Jamell Alvarez <br>
-* Jack Wagenheim
+* Jack Wagenheim <br>
+* Jonathan Walsh
+
 ## Setup
 
-Before the bot can be run, a few steps must be taken. After the repo has been cloned, use `brew install redis` to install the database used by the bot.
-Next, create a file titles `.env`, with the following format:
+The first step, for both local and ec2, is to use git to clone the repo to your own device. Once this has been completed, steps change depending on which way you prefer to deploy. You will also need to start a learner lab for either of these methods to work.
+
+# For Local Deployment:
+Firstly, ensure that brew is installed. If it is not, run `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"` to install it.
+Dind your `aws_access_key_id`, `aws_secret_acess_key`, and `aws_session_token`. They can be found in your learner lab under "AWS Details" > "AWS CLI". Format them in a directory named credentials, located in ~/.aws, as shown below (replacing "< VALUE >" with their corresponding values):
 
 ```sh
-DISCORD_TOKEN=<API key>
-CHANNEL_NAME=<Channel Name>
+[default]
+aws_access_key_id=< VALUE >
+aws_secret_access_key=< VALUE >
+aws_session_token=< VALUE >
 ```
 
-Where <API key> is replaced by your bots API key, and <Channel Name> is replace by the name of the channel in which the bot should be active.
-Finally, run `./deployLocal.sh` to execute a script that will execute the necessary steps to get the bot up and running.
+Once that has been completed, cd into the repo, and change the permissions on the `LocalDeploy.sh` file by using the command `chmod +x LocalDeploy.sh`. You can now execute `./LocalDeploy.sh` as a command, which will deploy the bot.
+
+# For EC2 Deployment:
+In the AWS Learner Lab, go to the Secrets Manager service, and store a new secret. Give it the key `DISCORD_TOKEN`, and the value of your own discord bot token. Repeat this step, storing another secret with the key `CHANNEL_NAME`, using the name of the channel you want the bot to run in as the value.
+
+Create a role connected to the secrets manager (or use the provided learner lab role), and attach it to the IAM Instance Profile advanced option after starting to create a new EC2 instance. Then, upload the `userData.sh` file from your local repo to the user data option. Finally, launch your instance. This will deploy the bot.
 
 
 ## Technologies Used
@@ -38,7 +48,7 @@ The software project management tool, Maven, is used to package the bot, so that
 
 ## Background
 
-
+INFORMATION NEEDED
 
 ## Project Description
 
