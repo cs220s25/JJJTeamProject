@@ -49,10 +49,26 @@ that can be implemented with any data storage method such as in memory or in a S
 The software project management tool, Maven, is used to package the bot, so that it can be run as a .jar file.
 [Maven Introduction](https://maven.apache.org/)
 
+Docker gets used to package applications with their dependencies. ***NEEDS MORE INFORMATION***
+[Docker Website](https://www.docker.com/get-started/)
+
+AWS Secrets Manager allows the user to store sensitive information. It is used in this repo to store the discord token and channel name.
+[AWS Secrets Manager Information](https://aws.amazon.com/secrets-manager/)
+
+Installing both Maven and Java can lead to having multiple Java versions, since Maven also pre-installs a version of Java. The command `sudo yum install -y maven-amazon-corretto21` installs Maven and Java at the same time, with no duplicates.
+[Corretto 21](http://docs.aws.amazon.com/corretto/latest/corretto-21-ug/what-is-corretto-21.html)
+
+GitHub Actions allow us to run processes after certain actions, such as a push or pull of a repo. Actions used in this project are for deployment and test running.
+[Github Actions information](https://learning.oreilly.com/library/view/github-actions-in/9781633437302)
+
 
 ## Background
 
-INFORMATION NEEDED
+
+[Information on setting up Apache Maven](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-project-maven.html)
+[Getting a Secrets Manager value through Java](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets-java-sdk.html)
+[Running commands on EC2 instance start with userData](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
+
 
 ## Project Description
 
