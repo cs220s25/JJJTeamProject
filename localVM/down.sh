@@ -1,2 +1,2 @@
 docker rm -f bot
-docker rm -f redisdb
+docker rm -f localhost
