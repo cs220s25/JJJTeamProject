@@ -6,21 +6,35 @@
 
 
 ## Contributors 
-* Jonathan Walsh <br>
 * Jamell Alvarez <br>
-* Jack Wagenheim
+* Jack Wagenheim <br>
+* Jonathan Walsh
+
 ## Setup
 
-Before the bot can be run, a few steps must be taken. After the repo has been cloned, use `brew install redis` to install the database used by the bot.
-Next, create a file titles `.env`, with the following format:
+The first step, for both local and ec2, is to use git to clone the repo to your own device. Once this has been completed, steps change depending on which way you prefer to deploy. You will also need to start a learner lab for either of these methods to work.
 
+# For Local Deployment:
+Firstly, ensure that brew is installed by running `brew -v`. If it is not, run the following command to install homebrew:
 ```sh
-DISCORD_TOKEN=<API key>
-CHANNEL_NAME=<Channel Name>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Where <API key> is replaced by your bots API key, and <Channel Name> is replace by the name of the channel in which the bot should be active.
-Finally, run `./deployLocal.sh` to execute a script that will execute the necessary steps to get the bot up and running.
+Next, find your `aws_access_key_id`, `aws_secret_acess_key`, and `aws_session_token`. They can be found in your learner lab under "AWS Details" > "AWS CLI". Format them in a directory named credentials, located in ~/.aws, as shown below (replacing "< VALUE >" with their corresponding values):
+
+```sh
+[default]
+aws_access_key_id=< VALUE >
+aws_secret_access_key=< VALUE >
+aws_session_token=< VALUE >
+```
+
+Once that has been completed, cd into the repo, and change the permissions on the `LocalDeploy.sh` file by using the command `chmod +x LocalDeploy.sh`. You can now execute `./LocalDeploy.sh` as a command, which will deploy the bot.
+
+# For EC2 Deployment:
+In the AWS Learner Lab, go to the Secrets Manager service, and store a new secret. Give it the key name `DISCORD_TOKEN`, and the value of your own discord bot token. Repeat this step, storing another secret with the key name `CHANNEL_NAME`, using the name of the channel you want the bot to run in as the value.
+
+Create a role connected to the secrets manager (or use the provided learner lab role labeled 'LabRole'), and attach it to the IAM Instance Profile advanced option after starting to create a new EC2 instance. Then, upload the `userData.sh` file from your local repo to the user data option. Finally, launch your instance. This will deploy the bot.
 
 
 ## Technologies Used
@@ -35,9 +49,27 @@ that can be implemented with any data storage method such as in memory or in a S
 The software project management tool, Maven, is used to package the bot, so that it can be run as a .jar file.
 [Maven Introduction](https://maven.apache.org/)
 
+Docker gets used to package applications with their dependencies. ***NEEDS MORE INFORMATION***
+[Docker Website](https://www.docker.com/get-started/)
+
+AWS Secrets Manager allows the user to store sensitive information. It is used in this repo to store the discord token and channel name.
+[AWS Secrets Manager Information](https://aws.amazon.com/secrets-manager/)
+
+Installing both Maven and Java can lead to having multiple Java versions, since Maven also pre-installs a version of Java. The command `sudo yum install -y maven-amazon-corretto21` installs Maven and Java at the same time, with no duplicates.
+[Corretto 21](http://docs.aws.amazon.com/corretto/latest/corretto-21-ug/what-is-corretto-21.html)
+
+GitHub Actions allow us to run processes after certain actions, such as a push or pull of a repo. Actions used in this project are for deployment and test running.
+[Github Actions information](https://learning.oreilly.com/library/view/github-actions-in/9781633437302)
+
 
 ## Background
 
+
+[Information on setting up Apache Maven](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-project-maven.html)
+
+[Getting a Secrets Manager value through Java](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets-java-sdk.html)
+
+[Running commands on EC2 instance start with userData](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
 
 
 ## Project Description
