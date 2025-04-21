@@ -12,8 +12,8 @@ class GameControllerTest {
     void testNewGameControllerHasNoUsedWords() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         assertEquals("No words used", gameController.used());
     }
 
@@ -21,8 +21,8 @@ class GameControllerTest {
     void testGameControllerInProgressHasAnagram() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         assertFalse(gameController.getAnagram().isEmpty());
     }
 
@@ -30,8 +30,8 @@ class GameControllerTest {
     void testGameControllerInProgressHasStatusInProgress() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         assertEquals(GameStatus.IN_PROGRESS, gameController.status());
     }
 
@@ -39,8 +39,8 @@ class GameControllerTest {
     void testGameControllerInProgressHasStatusNotStarted() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         gameController.stop();
         assertEquals(GameStatus.NOT_STARTED, gameController.status());
     }
@@ -49,8 +49,8 @@ class GameControllerTest {
     void testGameControllerInProgressHasStatusNotStartedAfterStop() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         gameController.stop();
         assertEquals(GameStatus.NOT_STARTED, gameController.status());
     }
@@ -58,8 +58,8 @@ class GameControllerTest {
     void testGameControllerInProgressHasStatusNotStartedAfterStopAndStart() {
         GameController gameController = new GameController();
         gameController.start();
-        gameController.join("player1");
-        gameController.join("player2");
+        gameController.joinForTesting("player1");
+        gameController.joinForTesting("player2");
         gameController.stop();
         gameController.start();
         assertEquals(GameStatus.STARTING, gameController.status());

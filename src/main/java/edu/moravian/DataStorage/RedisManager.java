@@ -1,5 +1,6 @@
 package edu.moravian.DataStorage;
 
+import com.github.fppt.jedismock.RedisServer;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 public class RedisManager implements DataManager {
     private Jedis jedis;
     private String anagram;
+
+
     public RedisManager(String player1, String player2) {
         try {
             jedis = new Jedis("localhost", 6379);
@@ -30,6 +33,33 @@ public class RedisManager implements DataManager {
             System.out.println("Cannot Connect to Redis");
         }
     }
+
+    /**
+     * Constructor for use in testing
+     * @param player1 first players name
+     * @param player2 second players name
+     * @param server Mock server object
+     */
+    public RedisManager(String player1, String player2, RedisServer server) {
+        try {
+            jedis = new Jedis(server.getHost(), server.getBindPort());
+            System.out.println("Connection to server successfully");
+            System.out.println("Server is running: " + jedis.ping());
+
+            // Initialize all data members in redis
+            if (!dataIngested()){
+                initializeLexiconData();
+            }
+            initializePlayerTags(player1, player2);
+            initializeScores();
+
+            // Initialize anagram
+            newAnagram();
+        } catch (JedisConnectionException e) {
+            System.out.println("Cannot Connect to Redis");
+        }
+    }
+
     private void initializeLexiconData(){
         BufferedReader reader;
         try {
