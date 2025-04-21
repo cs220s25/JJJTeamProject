@@ -1,6 +1,7 @@
 package edu.moravian.APP;
 
 import edu.moravian.DataStorage.DataManager;
+import edu.moravian.DataStorage.InMemoryManager;
 import edu.moravian.DataStorage.RedisManager;
 import edu.moravian.DataStorage.Score;
 import edu.moravian.exceptions.*;
@@ -17,6 +18,12 @@ public class GameController {
         this.gameStatus = GameStatus.NOT_STARTED;
         this.players = new ArrayList<>();
     }
+
+    public GameController(DataManager dataManager) {
+        this.gameStatus = GameStatus.NOT_STARTED;
+        this.players = new ArrayList<>();
+    }
+
     public boolean playerNotRegistered(String playerName) {
         return !players.contains(playerName);
     }
@@ -43,10 +50,19 @@ public class GameController {
     public void start() {
         gameStatus = GameStatus.STARTING;
     }
+
     public void join(String playerName) {
         players.add(playerName);
         if (players.size() == 2) {
             this.dataManager = new RedisManager(players.get(0), players.get(1));
+            gameStatus = GameStatus.IN_PROGRESS;
+        }
+    }
+
+    public void joinForTesting(String playerName) {
+        players.add(playerName);
+        if (players.size() == 2) {
+            this.dataManager = new InMemoryManager(players.get(0), players.get(1));
             gameStatus = GameStatus.IN_PROGRESS;
         }
     }
