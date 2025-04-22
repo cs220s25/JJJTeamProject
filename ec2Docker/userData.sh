@@ -6,4 +6,5 @@ usermod -a -G docker ec2-user
 yum install -y git
 git clone https://github.com/cs220s25/JJJTeamProject.git
 cd /JJJTeamProject
-docker compose up 
+chmod +x /JJJTeamProject/ec2Docker/redeploy.sh
+docker compose up -d
