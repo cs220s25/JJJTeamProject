@@ -5,7 +5,5 @@ systemctl start docker
 usermod -a -G docker ec2-user
 yum install -y git
 git clone https://github.com/cs220s25/JJJTeamProject.git
-cd /JJJTeamProject/ec2Docker
-chmod +x build.sh
-./build.sh
-./up.sh
+cd /JJJTeamProject
+docker compose up 
