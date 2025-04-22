@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - wordgame
+
+  bot:
+    build: .
+    container_name: bot
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    volumes:
+      - ~/.aws:/root/.aws:ro
+    networks:
+      - wordgame
+
+networks:
+  wordgame:
+    driver: bridge
