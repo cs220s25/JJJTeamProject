@@ -13,15 +13,18 @@ public class GameController {
     private DataManager dataManager;
     private final ArrayList<String> players;
     private GameStatus gameStatus;
+    private final String managerType;
 
     public GameController() {
         this.gameStatus = GameStatus.NOT_STARTED;
         this.players = new ArrayList<>();
+        this.managerType = "redis";
     }
 
-    public GameController(DataManager dataManager) {
+    public GameController(String managerType) {
         this.gameStatus = GameStatus.NOT_STARTED;
         this.players = new ArrayList<>();
+        this.managerType = managerType;
     }
 
     public boolean playerNotRegistered(String playerName) {
@@ -54,15 +57,12 @@ public class GameController {
     public void join(String playerName) {
         players.add(playerName);
         if (players.size() == 2) {
-            this.dataManager = new RedisManager(players.get(0), players.get(1));
-            gameStatus = GameStatus.IN_PROGRESS;
-        }
-    }
+            if (managerType.equals("redis")) {
+                this.dataManager = new RedisManager(players.get(0), players.get(1));
 
-    public void joinForTesting(String playerName) {
-        players.add(playerName);
-        if (players.size() == 2) {
-            this.dataManager = new InMemoryManager(players.get(0), players.get(1));
+            } else if (managerType.equals("inMemory")) {
+                this.dataManager = new InMemoryManager(players.get(0), players.get(1));
+            }
             gameStatus = GameStatus.IN_PROGRESS;
         }
     }
