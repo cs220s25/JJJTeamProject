@@ -9,6 +9,11 @@ public class CommandManager {
     CommandManager() {
         gameController = new GameController();
     }
+
+    CommandManager(GameController gameController) {
+        this.gameController = gameController;
+    }
+
     public String executeCommand(String cmdSignature, String playerName) {
         String message = "";
         if (gameController.playerNotRegistered(playerName) && gameController.status() == GameStatus.IN_PROGRESS) {
@@ -52,7 +57,7 @@ public class CommandManager {
                     • `!stop`: stop the game
                     • `!used`: get used words
                     • `!status`: get game status
-                    • `!help`: displays commands.""";
+                    • `!help`: displays commands. :)""";
     }
 
     public String used() {
