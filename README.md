@@ -1,9 +1,9 @@
 # Anagram Discord Bot
 
 ## CI Status 
+![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/TestsAndCheckstyle.yml/badge.svg) <br>
+![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/DeployDockerOnAws.yml/badge.svg) <br>
 ![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/DeployOnAws.yml/badge.svg)<br>
-![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/run_tests.yml/badge.svg) <br>
-
 
 ## Contributors 
 * Jamell Alvarez <br>
@@ -14,13 +14,14 @@
 
 The first step, for both local and ec2, is to use git to clone the repo to your own device. Once this has been completed, steps change depending on which way you prefer to deploy. You will also need to start a learner lab for either of these methods to work.
 
-# For Local Deployment:
-Firstly, ensure that brew is installed by running `brew -v`. If it is not, run the following command to install homebrew:
+### For Local Deployment:
+
+First, ensure that brew is installed by running `brew -v`. If it is not, run the following command to install homebrew:
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-Next, find your `aws_access_key_id`, `aws_secret_acess_key`, and `aws_session_token`. They can be found in your learner lab under "AWS Details" > "AWS CLI". Format them in a directory named credentials, located in ~/.aws, as shown below (replacing "< VALUE >" with their corresponding values):
+Next, find your `aws_access_key_id`, `aws_secret_acess_key`, and `aws_session_token`. They can be found in your learner lab under "AWS Details" > "AWS CLI". Format them in a text file named credentials, located in ~/.aws, as shown below (replacing "< VALUE >" with their corresponding values):
 
 ```sh
 [default]
@@ -28,10 +29,23 @@ aws_access_key_id=< VALUE >
 aws_secret_access_key=< VALUE >
 aws_session_token=< VALUE >
 ```
-
 Once that has been completed, cd into the repo, and change the permissions on the `LocalDeploy.sh` file by using the command `chmod +x LocalDeploy.sh`. You can now execute `./LocalDeploy.sh` as a command, which will deploy the bot.
 
-# For EC2 Deployment:
+### For LocalVM (Docker):
+Ensure Docker is installed on your device with 'docker --version'. If not install 'Docker Desktop` via docker docs website, 
+```sh
+https://docs.docker.com/desktop/setup/install/mac-install/
+```
+Make sure Docker Desktop is running for these nexts steps, In your cloned repo run,
+```sh
+docker compose up
+```
+this will then launch a docker network with two containers, one for redis another, for the discord bot. To turn off the network and containers do,
+```sh
+docker compose down
+```
+
+### For EC2 Deployment (Docker):
 In the AWS Learner Lab, go to the Secrets Manager service, and store a new secret. Give it the key name `DISCORD_TOKEN`, and the value of your own discord bot token. Repeat this step, storing another secret with the key name `CHANNEL_NAME`, using the name of the channel you want the bot to run in as the value.
 
 Create a role connected to the secrets manager (or use the provided learner lab role labeled 'LabRole'), and attach it to the IAM Instance Profile advanced option after starting to create a new EC2 instance. Then, upload the `userData.sh` file from your local repo to the user data option. Finally, launch your instance. This will deploy the bot.
@@ -61,9 +75,7 @@ Installing both Maven and Java can lead to having multiple Java versions, since 
 GitHub Actions allow us to run processes after certain actions, such as a push or pull of a repo. Actions used in this project are for deployment and test running.
 [Github Actions information](https://learning.oreilly.com/library/view/github-actions-in/9781633437302)
 
-
 ## Background
-
 
 [Information on setting up Apache Maven](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-project-maven.html)
 
