@@ -2,8 +2,6 @@
 
 ## CI Status 
 ![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/TestsAndCheckstyle.yml/badge.svg) <br>
-![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/DeployDockerOnAws.yml/badge.svg) <br>
-![Testing](https://github.com/cs220s25/JJJTeamProject/actions/workflows/DeployOnAws.yml/badge.svg)<br>
 
 ## Contributors 
 * Jamell Alvarez <br>
