@@ -12,7 +12,7 @@
 
 ## Setup
 
-The first step, for both local and ec2, is to use git to clone the repo to your own device. Once this has been completed, steps change depending on which way you prefer to deploy. You will also need to start a learner lab for either of these methods to work.
+The first step for either local deployment is to use git to clone the repo to your own device. A learner lab needs started for any of these methods to work. Once these steps have been completed, further setup changes depending on which way you prefer to deploy. 
 
 ### For Local Deployment:
 
@@ -29,9 +29,11 @@ aws_access_key_id=< VALUE >
 aws_secret_access_key=< VALUE >
 aws_session_token=< VALUE >
 ```
+
 Once that has been completed, cd into the repo, and change the permissions on the `LocalDeploy.sh` file by using the command `chmod +x LocalDeploy.sh`. You can now execute `./LocalDeploy.sh` as a command, which will deploy the bot.
 
 ### For LocalVM (Docker):
+
 Ensure Docker is installed on your device with 'docker --version'. If not install 'Docker Desktop` via docker docs website, 
 ```sh
 https://docs.docker.com/desktop/setup/install/mac-install/
@@ -40,15 +42,16 @@ Make sure Docker Desktop is running for these nexts steps, In your cloned repo r
 ```sh
 docker compose up
 ```
-this will then launch a docker network with two containers, one for redis another, for the discord bot. To turn off the network and containers do,
+this will then launch a docker network with two containers: one for redis and another for the discord bot. To turn off the network and containers do,
 ```sh
 docker compose down
 ```
 
 ### For EC2 Deployment (Docker):
+
 In the AWS Learner Lab, go to the Secrets Manager service, and store a new secret. Give it the key name `DISCORD_TOKEN`, and the value of your own discord bot token. Repeat this step, storing another secret with the key name `CHANNEL_NAME`, using the name of the channel you want the bot to run in as the value.
 
-Create a role connected to the secrets manager (or use the provided learner lab role labeled 'LabRole'), and attach it to the IAM Instance Profile advanced option after starting to create a new EC2 instance. Then, upload the `userData.sh` file from your local repo to the user data option. Finally, launch your instance. This will deploy the bot.
+Create a role connected to the secrets manager (or use the provided learner lab role labeled 'LabRole'), and attach it to the IAM Instance Profile advanced option after starting to create a new EC2 instance. Then, upload the contents of the `ec2Docker/userData.sh` file from the repo to the user data option. Finally, launch your instance. This will deploy the bot.
 
 
 ## Technologies Used
@@ -63,7 +66,7 @@ that can be implemented with any data storage method such as in memory or in a S
 The software project management tool, Maven, is used to package the bot, so that it can be run as a .jar file.
 [Maven Introduction](https://maven.apache.org/)
 
-Docker gets used to package applications with their dependencies. ***NEEDS MORE INFORMATION***
+Docker packages applications with their dependencies into containers that run consistently across various environments.
 [Docker Website](https://www.docker.com/get-started/)
 
 AWS Secrets Manager allows the user to store sensitive information. It is used in this repo to store the discord token and channel name.
@@ -75,6 +78,9 @@ Installing both Maven and Java can lead to having multiple Java versions, since 
 GitHub Actions allow us to run processes after certain actions, such as a push or pull of a repo. Actions used in this project are for deployment and test running.
 [Github Actions information](https://learning.oreilly.com/library/view/github-actions-in/9781633437302)
 
+Checkstyle checks coding styles before an action occurs. In the case of this repo, it checks the style before both a push or a pull request go through.
+[Checkstyle Documentation](https://checkstyle.org/config.html)
+
 ## Background
 
 [Information on setting up Apache Maven](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/setup-project-maven.html)
@@ -82,6 +88,10 @@ GitHub Actions allow us to run processes after certain actions, such as a push o
 [Getting a Secrets Manager value through Java](https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets-java-sdk.html)
 
 [Running commands on EC2 instance start with userData](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
+
+[Information on Implementing Checkstyle](https://www.baeldung.com/checkstyle-java)
+
+[Docker Compose Startup Walkthrough](https://docs.docker.com/compose/gettingstarted/)
 
 
 ## Project Description
