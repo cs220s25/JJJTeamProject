@@ -28,7 +28,7 @@ aws_secret_access_key=< VALUE >
 aws_session_token=< VALUE >
 ```
 
-Once that has been completed, cd into the repo, and change the permissions on the `LocalDeploy.sh` file by using the command `chmod +x LocalDeploy.sh`. You can now execute `./LocalDeploy.sh` as a command, which will deploy the bot.
+Once that has been completed, cd into the repo, and change the permissions on the `localMachine/LocalDeploy.sh` file by using the command `chmod +x localMachine/LocalDeploy.sh`. You can now execute `localMachine/LocalDeploy.sh` as a command, which will deploy the bot.
 
 ### For LocalVM (Docker):
 
