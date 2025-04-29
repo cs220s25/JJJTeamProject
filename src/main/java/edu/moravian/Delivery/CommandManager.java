@@ -57,7 +57,7 @@ public class CommandManager {
                     • `!stop`: stop the game
                     • `!used`: get used words
                     • `!status`: get game status
-                    • `!help`: displays commands.""";
+                    • `!help`: displays commands. foo bar""";
     }
 
     public String used() {
